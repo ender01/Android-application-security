@@ -1,10 +1,10 @@
-# Android-application-Security
+# Android-application-security
 =============================================================
 
-Android-application-Security is a collection of Android application security resources:
+Android-application-security is a collection of Android application security resources:
 * Books
 * Tools
-* Best practices(checklists)
+* Checklists
 * Other related resources
 -----------------------------------------------
 [Books.md](https://github.com/ender01/Android-security/blob/master/Books.md)

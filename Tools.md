@@ -8,6 +8,8 @@
 
 ## Drozer(https://labs.mwrinfosecurity.com/tools/drozer/)
 
+## SQLite Manager(https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/)
+
 ## Virtuous Ten Studio (VTS)
 **Not available for now**
 
