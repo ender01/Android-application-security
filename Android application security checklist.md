@@ -1,23 +1,23 @@
-# Android application security best practices
+# Android application security checklist
 ## Authorization
 ### AR-001 Check system permission
 #### Overview
-The **uses-permission** element requests a permission that the application must be granted in order for it to operate correctly. Permissions are granted by the user when the application is installed, not while it's running.
+The `uses-permission` element requests a permission that the application must be granted in order for it to operate correctly. Permissions are granted by the user when the application is installed, not while it's running.
 #### Code review
-Check the **uses-permission** elements in AndroidManifest.xml.
+Check the `uses-permission` elements in `AndroidManifest.xml`.
 #### Manual assessment
-Use tools to review the permissions used in AndroidManifest.xml. For example, ManifestViewer in  Google Play Store. Or use Drozer command: `run app.package.info --package PACKAGE_NAME` to check the **Uses Permissions** section.
+Use tools to review the permissions used in `AndroidManifest.xml`. For example, *ManifestViewer* in  Google Play Store. Or use *Drozer* command: `run app.package.info --package PACKAGE_NAME` to check the `Uses Permissions` section.
 #### Excepted result
 No excessive permissions are requested.
 
 ---
 ### AR-002 Check custom permission
 #### Overview
-Android allows to declare a custom permission that can be used to limit access to specific components or features of this or other applications. Android permissions are classified in four different categories based on the protection level it offers: Normal(by default), Dangerous, Signature and SystemOrSignature. Details can be referred to [https://developer.android.com/guide/topics/manifest/permission-element.html#plevel](https://developer.android.com/guide/topics/manifest/permission-element.html#plevel).
+Android allows to declare a custom permission that can be used to limit access to specific components or features of this or other applications. Android permissions are classified in four different categories based on the protection level it offers: `Normal`(by default), `Dangerous`, `Signature` and `SystemOrSignature`. Details can be referred to [https://developer.android.com/guide/topics/manifest/permission-element.html#plevel](https://developer.android.com/guide/topics/manifest/permission-element.html#plevel).
 #### Code review
-Check the **permission** elements in AndroidManifest.xml.
+Check the `permission` elements in AndroidManifest.xml.
 #### Manual assessment
-Use tools to review the custom permission in AndroidManifest.xml. For example, use ManifestViewer in  Google Play Store to check the **permission** element. Or use Drozer command: `run app.package.info -a PACKAGE_NAME` to check the **Defines Permissions** section.
+Use tools to review the custom permission in `AndroidManifest.xml`. For example, use *ManifestViewer* in Google Play Store to check the `permission` element. Or use *Drozer* command: `run app.package.info -a PACKAGE_NAME` to check the `Defines Permissions` section.
 #### Excepted result
 Custom permission should be used properly.
 
@@ -26,16 +26,16 @@ Custom permission should be used properly.
 #### Overview
 An activity represents a single screen with a user interface. Activity can be set with a permission attribute to require a certain permission when be started.
 
-The android:exported element:
+The `android:exported` element:
 Whether or not the activity can be launched by components of other applications — "true" if it can be, and "false" if not. If "false", the activity can be launched only by components of the same application or applications with the same user ID.
 
 The default value depends on whether the activity contains intent filters. The absence of any filters means that the activity can be invoked only by specifying its exact class name. So in this case, the default value is "false". On the other hand, the presence of at least one filter implies that the activity is intended for external use, so the default value is "true".
 
 The permission element can also be used to limit the external entities that can send it messages.
 #### Code review
-Check the **activity** elements in AndroidManifest.xml.
+Check the `activity` elements in `AndroidManifest.xml`.
 #### Manual assessment
-Use tools to check the activities. For example, use drozer command:
+Use tools to check the activities. For example, use *Drozer* command:
 `run app.activity.info ––package PACKAGE_NAME`
 #### Excepted result
 The activity is not exported if it is not necessary. If it is exported, proper permission should be defined to restrict the access.
@@ -45,16 +45,16 @@ The activity is not exported if it is not necessary. If it is exported, proper p
 #### Overview
 Services are the background processing components in Android. It is possible to restrict who can interact with a service by applying permissions.
 
-The android:exported element:
+The `android:exported` element:
 Whether or not components of other applications can invoke the service or interact with it — "true" if they can, and "false" if not. When the value is "false", only components of the same application or applications with the same user ID can start the service or bind to it.
 
 The default value depends on whether the service contains intent filters. The absence of any filters means that it can be invoked only by specifying its exact class name. So in this case, the default value is "false". On the other hand, the presence of at least one filter implies that the service is intended for external use, so the default value is "true".
 
 The permission element can also be used to limit the external entities that can send it messages.
 #### Code review
-Check the **service** elements in AndroidManifest.xml.
+Check the `service` elements in AndroidManifest.xml.
 #### Manual assessment
-Use tools to check the services. For example, use drozer command:
+Use tools to check the services. For example, use *Drozer* command:
 `run app.service.info ––package PACKAGE_NAME`
 #### Excepted result
 The service is not exported if it is not necessary. If it is exported, proper permission should be defined to restrict the access.
@@ -65,9 +65,9 @@ The service is not exported if it is not necessary. If it is exported, proper pe
 Content Providers are the standard way for apps to make their data available to other apps. And Content Providers can specify two different required
 permissions: one for reading and one for writing.
 #### Code review
-Check the **provider** elements in AndroidManifest.xml.
+Check the `provider` elements in AndroidManifest.xml.
 #### Manual assessment
-Use tools to check the providers. For example, use drozer command:
+Use tools to check the providers. For example, use *Drozer* command:
 `run app.provider.info –a PACKAGE_NAME`
 and
 `run scanner.provider.finduris -a PACKAGE_NAME`
@@ -78,18 +78,18 @@ The service is not exported if it is not necessary. If it is exported, proper pe
 ### AR-006 Check exported BroadcastReceiver
 #### Overview
 Broadcast receivers are registered for specific events to occur.
-The android:exported element:
+The `android:exported` element:
 Whether or not the broadcast receiver can receive messages from sources outside its application — "true" if it can, and "false" if not. If "false", the only messages the broadcast receiver can receive are those sent by components of the same application or applications with the same user ID.
 The default value depends on whether the broadcast receiver contains intent filters. The absence of any filters means that it can be invoked only by Intent objects that specify its exact class name. So in this case, the default value is "false". On the other hand, the presence of at least one filter implies that the broadcast receiver is intended to receive intents broadcast by the system or other applications, so the default value is "true".
 
 The permission element can also be used to limit the external entities that can send it messages.
 #### Code review
-Check the **receiver** elements in AndroidManifest.xml.
+Check the `receiver` elements in AndroidManifest.xml.
 #### Manual assessment
-Use tools to check the providers. For example, use drozer command:
+Use tools to check the providers. For example, use *Drozer* command:
 `run app.broadcast.info -a PACKAGE_NAME -i`
 #### Excepted result
-The recevier is not exported if it is not necessary. If it is exported, proper permission should be defined to restrict the access.
+The receiver is not exported if it is not necessary. If it is exported, proper permission should be defined to restrict the access.
 
 ---
 ## Configuration
@@ -99,7 +99,7 @@ Android allows the attribute `android:debuggable` to be set to true so that the 
 #### Code review
 Check the value of `android:debuggable` in AndroidManifest.xml.
 #### Manual assessment
-Use tools to check whether the debug mode is enabled. For example, use Drozer command: `run app.package.debuggable -f PACKAGE_NAME` or run `app.package.attacksurface PACKAGE_NAME`.
+Use tools to check whether the debug mode is enabled. For example, use *Drozer* command: `run app.package.debuggable -f PACKAGE_NAME` or run `app.package.attacksurface PACKAGE_NAME`.
 #### Excepted result
 Debug mode is disabled.
 
@@ -110,7 +110,7 @@ Debug mode is disabled.
 #### Code review
 Check the value of `android:allowBackup` in AndroidManifest.xml.
 #### Manual assessment
-Use tools to check whether backup is enabled or not. For example, use Drozer command: `run app.package.backup -f com.luxoft.androidctf`.
+Use tools to check whether backup is enabled or not. For example, use *Drozer* command: `run app.package.backup -f com.luxoft.androidctf`.
 #### Excepted result
 Backup is disabled. If it is enabled, make sure no sensitive data was included.
 
@@ -118,20 +118,20 @@ Backup is disabled. If it is enabled, make sure no sensitive data was included.
 ## Data Storage
 ### DS-001 Check data stored in SharedPreferences
 #### Overview
-The SharedPreferences provides a general framework to save and retrieve persistent key-value pairs in plain text within the app's private data directory.
+The `SharedPreferences` provides a general framework to save and retrieve persistent key-value pairs in plain text within the app's private data directory.
 #### Code review
-Check the source code to verify the usage of SharedPreferences.
+Check the source code to verify the usage of `SharedPreferences`.
 #### Manual assessment
-Check the SharedPreferences files under `/data/data/PACKAGE_NAME /shared_prefs/`.
+Check the `SharedPreferences` files under `/data/data/PACKAGE_NAME /shared_prefs/`.
 #### Excepted result
-No sensitive data or user private data is stored in SharedPreferences files without protection.
+No sensitive data or user private data is stored in `SharedPreferences` files without protection.
 
 ---
 ### DS-002 Check data stored in SQLite databases
 #### Overview
 SQLite database is full supported by Android, but the data stored in it is not encrypted.
 #### Code review
-Check the usage of SQLiteDatabase. Such as: `execSQL()`.
+Check the usage of `SQLiteDatabase`. Such as: `execSQL()`.
 #### Manual assessment
 Check the SQLite DB files. For example, DB files under `/data/data/PACKAGE_NAME/` with the extension of `.db` or `.sqlite`.
 #### Excepted result
@@ -142,7 +142,10 @@ No sensitive data or user private data is stored in SQLite databases without pro
 #### Overview
 Temporary cache files will be cached and will be deleted when the device is low on internal storage space.
 #### Code review
-Check the usage of `getExternalCacheDir()` and `getCacheDir()`. **Note**: Manual accessment is necessary because code review is not sufficient.
+Check the usage of `getExternalCacheDir()` and `getCacheDir()`.
+
+**Manual assessment is necessary because code review is not sufficient.**
+
 #### Manual assessment
 Check files under: `/data/data/<package name>/cache/` and `/sdcard/Android/data/PACKAGE_NAME/cache/`.
 #### Excepted result
@@ -164,21 +167,23 @@ No sensitive data or user private data is saved in internal storage without prot
 #### Overview
 External storage is the best place for files that don't require access restrictions and for files that you want to share with other apps or allow the user to access with a computer.
 #### Code review
-Check all the IO operation to investigate the data saved to external storage. Such as `FileOutputStream, getExternalStorageDirectory(), getExternalStoragePublicDirectory()` and so on.
+Check all the IO operation to investigate the data saved to external storage. Such as `FileOutputStream`, `getExternalStorageDirectory()`, `getExternalStoragePublicDirectory()` and so on.
 #### Manual assessment
-Check the files saved in the SDCARD(under /sdcard) by the target app. Since there are too many files in the SDCARD, this can be done by monitor the file changes by tools like Inspeckage or check the file update time.
+Check the files saved in the SDCARD(under /sdcard) by the target app. Since there are too many files in the SDCARD, this can be done by monitor the file changes by tools like *Inspeckage*.
 #### Excepted result
-No sensitive data or user private data is saved in external storage
+No sensitive data or user private data is saved in external storage.
 
 ---
 ## Data Transmission
-### DT-001 Check sensitive data is transmitted via secure channel
+### DT-001 Check sensitive data transmission
 #### Overview
 It is imperative that the communications between android applications and servers are performed in a proper encrypted channel.
 #### Code review
-Check the source code to investigate the data sent to the server. For example, the usage of `http://, HttpURLConnection,URLConnection, URL, TrustAllSSLSocketFactory, AllTrustSSLSocketFactory, NonValidatingSSLSocketFactory` in source code and so on. **Note**: Manual assessment is necessary since code review is not sufficient.
+Check the source code to investigate the data sent to the server. For example, the usage of `http://`, `HttpURLConnection`,  `URLConnection`, `URL`,  `TrustAllSSLSocketFactory`,  `AllTrustSSLSocketFactory`, `NonValidatingSSLSocketFactory` in source code and so on.
+
+**Manual assessment is necessary since code review is not sufficient.**
 #### Manual assessment
-Check the network communication by using any proxy tools. For example, Burpsuite or Fiddler.
+Check the network communication by using any proxy tools. For example, *Burpsuite* or Fiddler.
 #### Excepted result
 Secure channel is used to transmit sensitive data.
 
@@ -197,25 +202,25 @@ N/A
 ## Data Validation
 ### DV-001 Check JavaScript Execution in WebViews
 #### Overview
-JavaScript is disabled in a WebView by default, but can be enabled through the WebSettings.
+JavaScript is disabled in a `WebView` by default, but can be enabled through the `WebSettings`.
 #### Code review
 Check the `setJavaScriptEnabled()` method in source code.
 #### Manual assessment
 N/A
 #### Excepted result
-JavaScript is disabled. If enabled, make sure no malicious code is executed.
+JavaScript is disabled. If enabled, proper validation must be implemented to prevent from malicious code execution.
 
 ---
 ### DV-002 Check resources included in WebViews
 #### Overview
-WebView supports  a number of  different file formats,  including:
--HTML
--PDF
--RTF
--Audio
--Image
--Video
-Resource can be loaded by loaded through the method `loadURL()`. File access should be disabled by explicit if not need:
+`WebView` supports  a number of  different file formats,  including:
+    - HTML
+    - PDF
+    - RTF
+    - Audio
+    - Image
+    - Video
+Resource can be loaded through the method `loadURL()`. File access should be disabled by explicit if not need:
 ```Java
 webView.getSettings().setAllowFileAccess(false);
 webView.getSettings().setAllowFileAccessFromFileURLs(false);
@@ -223,7 +228,7 @@ webView.getSettings().setAllowUniversalAccessFromFileURLs(false);
 webView.getSettings().setAllowContentAccess(false);
 ```
 #### Code review
-Check the `loadURL()` method in source code to verify what resource is loaded in Webview. If any dynamic parameters are used, make sure the parameters are validated.
+Check the `loadURL()` method in source code to verify what resource is loaded in `Webview`. If any dynamic parameters are used, make sure the parameters are validated.
 #### Manual assessment
 N/A
 #### Excepted result
@@ -239,7 +244,8 @@ Check the `addJavascriptInterface()` method in source code.
 N/A
 #### Excepted result
 `JavascriptInterface` is not enabled. If enabled, make sure it will not be called by malicious code, such as XSS.
-**Note**: JavaScript `alert()` function does not work on the raw WebView.
+
+**JavaScript `alert()` function does not work on the raw WebView.**
 
 ---
 ### DV-004 Check injection for SQLite databases
@@ -249,9 +255,10 @@ SQL injection is a code injection technique, used to attack data-driven applicat
 Check SQL queries to verify whether dynamic queries exist.
 #### Manual assessment
 Check every input to verify SQL injection attack.
-**Note**: It will be more effective to verify this by code review.
+
+**It will be more effective to verify this by code review.**
 #### Excepted result
-Parameterized queries are used.
+Parameterized query should be used.
 
 ---
 ### DV-005 Check injection for Content Providers
@@ -260,9 +267,9 @@ As per Google’s inbuilt security model, application data is private to an appl
 
 Content providers use standard `insert()`, `query()`, `update()`, and `delete()` methods to access application data. A special form of URI which starts with `content://` is assigned to each content provider. Any app which knows this URI can insert, update, delete, and query data from the database of the provider app.
 #### Code review
-Check the `insert()`, `query()`, `update()`, and `delete()` methods of Content Provider in source code.
+Check the `insert()`, `query()`, `update()`, and `delete()` methods of `Content Provider` in source code.
 #### Manual assessment
-Use tools to check injection attack for Content Provider. Fox example, use Drozer command:
+Use tools to check injection attack for Content Provider. Fox example, use *Drozer* command:
 `run scanner.provider.injection -a PACKAGE_NAME`.
 #### Excepted result
 Content Provider injection is protected.
@@ -270,11 +277,11 @@ Content Provider injection is protected.
 ---
 ### DV-006 Check code injection
 #### Overview
-`DexClassLoader` loads classes from .jar and .apk files containing a classes.dex entry. This can be used to execute code not installed as part of an application.
+`DexClassLoader` loads classes from `.jar` and `.apk` files containing a `classes.dex` entry. This can be used to execute code not installed as part of an application.
 
 In the Android security model, the only security boundary is at the process level (not at the JVM level). So, nothing in Android prevents code injection into a process that you already control. As the Android docs state, untrusted code cannot be safely isolated within the Dalvik VM. That's just a fundamental consequence of Android's security architecture.
 #### Code review
-Check the usage of `DexClassLoader`(Or other ClassLoader used to load code dynamically).
+Check the usage of `DexClassLoader`(Or other `ClassLoader` used to load code dynamically).
 #### Manual assessment
 N/A
 #### Excepted result
@@ -287,12 +294,12 @@ Dynamic code load should not be used. If used, make sure not code injection atta
 Android logging system provides a mechanism for collecting and viewing system debug output. Log class is used to print out messages to the LogCat.
 `Android.util.Log` offers five export functions: `Log.e()`, `Log.w()`, `Log.i()`, `Log.d()`, `Log.v()` for ERROR, WARN, INFO, DEBUG, VERBOSE debug types.
 
-App logs can be accessed by requesting READ_LOGS permission in Android prior to 4.1.
-In Android 4.1 and later version, App logs can not be accessed by other applications.
+**App logs can be accessed by requesting READ_LOGS permission in Android prior to 4.1.
+In Android 4.1 and later version, App logs can not be accessed by other applications.**
 #### Code review
 Check the usage of `Android.util.Log` in source code.
 #### Manual assessment
-Use tools to review the Android system log. For example, use adb command: `adb logcat -d -v long > /filePath/output.txt` or `adb logcat -s TAG_NAME:V > c:/ctf.log` to filter the log by tag name.
+Use tools to review the Android system log. For example, use *adb* command: `adb logcat -d -v long > /filePath/output.txt` or `adb logcat -s TAG_NAME:V > c:/ctf.log` to filter the log by tag name.
 #### Excepted result
 No sensitive data or user personal data is logged.
 
@@ -315,7 +322,7 @@ If sensitive data(password, credit card information and so on) is not masked pro
 #### Code review
 Check the `android:inputType="textPassword"` attribute is used for the `EditText` which includes sensitive data.
 #### Manual assessment
-Check the sensitve data displayed in user interfaces.
+Check the sensitive data displayed in user interfaces.
 #### Excepted result
 Sensitive data displayed in User Interfaces is protected.
 
@@ -377,13 +384,13 @@ Sensitive data should not be captured in recent application list screenshots.
 ---
 ### SD-005 Check GeoLocation usage
 #### Overview
-If the application wants to receive location updates from **NETWORK_PROVIDER** or **GPS_PROVIDER**, the **ACCESS_COARSE_LOCATION** or **ACCESS_FINE_LOCATION** permission will be requested on AndroidManifest.xml.
+If the application wants to receive location updates from `NETWORK_PROVIDER` or `GPS_PROVIDER`, the `ACCESS_COARSE_LOCATION` or `ACCESS_FINE_LOCATION` permission will be requested on `AndroidManifest.xml`.
 #### Code review
 Check the usage of GeoLocation, such as `getLastKnownLocation()`, `requestLocationUpdates()`, `getLatitude()`, `getLongitude()` in Source code.
 #### Manual assessment
 N/A
 #### Excepted result
-Application does not misuse and leak user's GeoLocation
+Application does not misuse and leak user's `GeoLocation`.
 
 ---
 ### SD-006 Check sensitive message in Toast
@@ -415,7 +422,7 @@ android {
 }
 ```
 #### Manual assessment
-Use tools(such as **dex2jar** and **JD-GUI**) to reverse the APK file to review the source code.
+Use tools(such as *dex2jar* and *JD-GUI*) to reverse the APK file to review the source code.
 #### Excepted result
 Code protection should be implemented to protect sensitive data in the source code of client side.
 

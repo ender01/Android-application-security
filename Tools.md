@@ -1,26 +1,25 @@
 # Tools
 
-## apktools(https://ibotpeaches.github.io/Apktool/)
+## [apktools](https://ibotpeaches.github.io/Apktool/)
 
-## dex2jar(https://github.com/pxb1988/dex2jar)
+## [dex2jar](https://github.com/pxb1988/dex2jar)
 
-## jd-gui(http://jd.benow.ca/)
+## [jd-gui](http://jd.benow.ca/)
 
-## Drozer(https://labs.mwrinfosecurity.com/tools/drozer/)
+## [Drozer](https://labs.mwrinfosecurity.com/tools/drozer/)
 
-## SQLite Manager(https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/)
+## [SQLite Manager](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/)
 
-## Virtuous Ten Studio (VTS)
-**Not available for now**
+## [Virtuous Ten Studio (VTS)](http://virtuous-ten-studio.com/)
 
-## JEB(https://www.pnfsoftware.com/)
+## [JEB](https://www.pnfsoftware.com/)
 **Commercial**
 
-## Mobile Security Framework (MobSF) (https://github.com/MobSF/Mobile-Security-Framework-MobSF)
+## [Mobile Security Framework (MobSF)](https://github.com/MobSF/Mobile-Security-Framework-MobSF)
 
-## APPUSE(https://appsec-labs.com/AppUse/)
-**Commercial**
+## [APPUSE](https://appsec-labs.com/AppUse/)
+**Commercial and free**
 
-## Appie(https://manifestsecurity.com/appie/)
+## [Appie](https://manifestsecurity.com/appie/)
 
-## Santoku(https://santoku-linux.com/)
+## [Santoku](https://santoku-linux.com/)
